@@ -50,3 +50,7 @@ You then have a cool functional terminal to help you create the package. Enjoy!
 ![First](http://i.imgur.com/7XkKtQe.png)
 
 ![Second](http://i.imgur.com/hgBzQQw.png)
+
+## Package Structure
+
+![Structure](http://i.imgur.com/wOEynKN.png)
