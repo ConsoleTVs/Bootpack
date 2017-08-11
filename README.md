@@ -1,8 +1,7 @@
-<center>
+<p align="center">
     <img src="http://i.imgur.com/viDkXrW.png">
-    <h1>Bootpack</h1>
-    <h2>Laravel 5 package bootstraper</h2>
-</center>
+    <h1 align="center">Bootpack - Laravel 5 package bootstraper</h1>
+</p>
 
 ## Description
 
