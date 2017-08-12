@@ -20,7 +20,7 @@ It features a full terminal application based on an artisan command.
 ## Installation
 
 ```
-composer require consoletvs\bootpack
+composer require consoletvs/bootpack
 ```
 
 Register the service provider to the current project (Not needed if using laravel 5.5+):
