@@ -61,7 +61,7 @@ class BootpackCreatePackage extends Command
 
                 $this->table(array_keys(get_object_vars($package)), [get_object_vars($package)]);
 
-                while(!$this->confirm('Everything looks cool?', 'yes')) {
+                while (!$this->confirm('Everything looks cool?', 'yes')) {
                     $this->comment('Woah! Let me ask you everything again!');
 
                     $package = $this->package($name);
@@ -69,7 +69,6 @@ class BootpackCreatePackage extends Command
                     $this->comment('Great, confirm the following data before we go ahead!');
 
                     $this->table(array_keys(get_object_vars($package)), [get_object_vars($package)]);
-
                 };
 
                 $this->comment('Fantastic! Let me create the composer.json for your...');
@@ -127,10 +126,11 @@ class BootpackCreatePackage extends Command
                 $this->comment('Hey we are almost done with this! Let me add the class loader to the current composer project...');
 
                 $l_composer = json_decode(file_get_contents(base_path('composer.json')), true);
-                $l_composer['autoload']['psr-4'][$package->namespace . '\\'] = str_replace(base_path() . '/', '', $path) . '/src';
-                file_put_contents(base_path('composer.json'), json_encode($l_composer,
-                    JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-                ));
+                $l_composer['autoload']['psr-4'][$package->namespace.'\\'] = str_replace(base_path().'/', '', $path).'/src';
+                file_put_contents(
+                    base_path('composer.json'),
+                    json_encode($l_composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                );
 
                 $this->info('Your main composer.json file has been updated.');
                 $this->comment('Seems like the only thing left is to dump the composer autoload...');
@@ -154,6 +154,32 @@ class BootpackCreatePackage extends Command
                     $this->line('Skipping the composer dump autoload...');
                     $this->line('Pleae manually dump the autoload: composer dump-autoload');
                 }
+
+                if ($this->confirm('Do you want to create REAMDE.md?', 'yes')) {
+                    $this->comment('Creating REAMDE.md...');
+
+                    $readme = fopen("$path/README.md", "w");
+                    fwrite($readme, "# $package->name\n\n$package->description");
+                    fclose($readme);
+
+                    $this->info('Very cool! The REAMDE.md has been created!');
+                } else {
+                    $this->line('Skipping the creation of REAMDE.md...');
+                }
+
+                $this->comment('Searching for license File...');
+
+                $licenses = scandir(__DIR__ . '/../Licenses');
+
+                if (in_array($package->license, $licenses)) {
+                    copy(__DIR__ . "/../Licenses/$package->license", "$path/LICENSE");
+                    Helpers::strReplaceFile('{{ YEAR }}', date('Y'), "$path/LICENSE");
+                    Helpers::strReplaceFile('{{ AUTHOR }}', $package->author, "$path/LICENSE");
+                    $this->info('Nice! The LICENSE file is ready!');
+                } else {
+                    $this->error("Whoops! The License of your package is unknown for Bootpack so cannot be created automatically");
+                }
+
 
                 if ($this->confirm('Do you want to continue? Make sure the auto-load was dumped', 'yes')) {
                     $this->comment('Registering the service provider in the current laravel application...');
@@ -186,7 +212,6 @@ class BootpackCreatePackage extends Command
                     $this->info('Aborted package extra steps...');
                     $this->line('Package location: ' . $path);
                 }
-
             } else {
                 $this->error("The folder '{$path}' already exists");
             }
