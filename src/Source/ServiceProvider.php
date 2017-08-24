@@ -14,13 +14,13 @@ class {{ UCNAME }}ServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->aliasMiddleware('{{ NAME }}', {{ NAMESPACE }}\Middleware\{{ UCNAME }}Middleware::class);
+        $router->aliasMiddleware('{{ NAME }}', \{{ NAMESPACE }}\Middleware\{{ UCNAME }}Middleware::class);
 
         $this->publishes([
             __DIR__.'/Config/{{ NAME }}.php' => config_path('{{ NAME }}.php'),
         ], '{{ NAME }}_config');
 
-        $this->loadRoutesFrom(__DIR__.'/Routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
 
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
 
@@ -55,7 +55,7 @@ class {{ UCNAME }}ServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/Config/{{ NAME }}.php', '{{ NAME }}'
+            __DIR__ . '/Config/{{ NAME }}.php', '{{ NAME }}'
         );
     }
 }
