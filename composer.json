@@ -5,7 +5,7 @@
     "require": {
         "php": ">=7.0",
         "illuminate/support": "5.*",
-        "consoletvs/support": "^1.0.6",
+        "consoletvs/support": "^2.2.0",
         "composer/composer": "^1.5.1"
     },
     "license": "MIT",
