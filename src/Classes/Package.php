@@ -47,7 +47,7 @@ class Package
             ],
             'extra' => [
                 'providers' => [
-                    $this->namespace . '\\' . ucfirst(explode('/', $this->name)[0]) . 'ServiceProvider'
+                    $this->namespace . '\\' . ucfirst(explode('/', $this->name)[1]) . 'ServiceProvider'
                 ]
             ],
             'minimum-stability' => "dev",
