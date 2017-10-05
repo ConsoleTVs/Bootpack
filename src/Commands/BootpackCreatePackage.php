@@ -185,8 +185,8 @@ class BootpackCreatePackage extends Command
                     $this->comment('Registering the service provider in the current laravel application...');
 
                     Helpers::strReplaceFile(
-                        'ConsoleTVs\\Bootpack\\BootpackServiceProvider::class',
-                        "ConsoleTVs\\Bootpack\\BootpackServiceProvider::class,\n\t\t"
+                        'App\\Providers\\RouteServiceProvider::class,',
+                        "App\\Providers\\RouteServiceProvider::class,\n\t\t"
                         . $package->namespace . "\\" . ucfirst($p_name) . 'ServiceProvider::class',
                         base_path('config/app.php')
                     );
