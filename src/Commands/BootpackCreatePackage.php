@@ -71,7 +71,7 @@ class BootpackCreatePackage extends Command
                     $this->table(array_keys(get_object_vars($package)), [get_object_vars($package)]);
                 };
 
-                $this->comment('Fantastic! Let me create the composer.json for your...');
+                $this->comment('Fantastic! Let me create the composer.json for you...');
 
                 file_put_contents($path . '/composer.json', $package->json());
 
@@ -155,16 +155,16 @@ class BootpackCreatePackage extends Command
                     $this->line('Pleae manually dump the autoload: composer dump-autoload');
                 }
 
-                if ($this->confirm('Do you want to create REAMDE.md?', 'yes')) {
-                    $this->comment('Creating REAMDE.md...');
+                if ($this->confirm('Do you want to create README.md?', 'yes')) {
+                    $this->comment('Creating README.md...');
 
                     $readme = fopen("$path/README.md", "w");
                     fwrite($readme, "# $package->name\n\n$package->description");
                     fclose($readme);
 
-                    $this->info('Very cool! The REAMDE.md has been created!');
+                    $this->info('Very cool! The README.md has been created!');
                 } else {
-                    $this->line('Skipping the creation of REAMDE.md...');
+                    $this->line('Skipping the creation of README.md...');
                 }
 
                 $this->comment('Searching for license File...');
