@@ -187,7 +187,7 @@ class BootpackCreatePackage extends Command
                     Helpers::strReplaceFile(
                         'App\\Providers\\RouteServiceProvider::class,',
                         "App\\Providers\\RouteServiceProvider::class,\n\t\t"
-                        . $package->namespace . "\\" . ucfirst($p_name) . 'ServiceProvider::class',
+                        . $package->namespace . "\\" . ucfirst($p_name) . 'ServiceProvider::class,',
                         base_path('config/app.php')
                     );
 
