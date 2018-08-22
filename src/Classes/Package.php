@@ -36,10 +36,10 @@ class Package
                 'php' => ">={$this->php}",
                 'illuminate/support' => '5.*'
             ],
-            'author' => [
+            'authors' => [[
                 'name' => explode('<', $this->author)[0],
                 'email' => Helpers::getBetween('<', '>', $this->author)
-            ],
+            ]],
             'autoload' => [
                 'psr-4' => [
                     $this->namespace . '\\' => 'src/',
